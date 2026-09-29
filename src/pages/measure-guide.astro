@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import Faq from '../components/Faq.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE, PAGES } from '../site.config.mjs';
+
+const meta = PAGES.find((p) => p.path === '/measure-guide/');
+
+const steps = [
+  { name: 'Chest', text: 'Measure around the fullest part of the bust or chest, tape level and snug but not compressing. Keep your arms down for this one.' },
+  { name: 'Underbust', text: 'Measure directly under the bust, around the ribcage, with the tape level. This tells the maker how much support the garment needs.' },
+  { name: 'Waist', text: 'Find the narrowest point of your torso, usually just above the navel. Breathe out normally and measure — do not pull the stomach in.' },
+  { name: 'Hip', text: 'Measure around the fullest part of the hips and seat, roughly 20 cm below the waist. Keep your feet together.' },
+  { name: 'Thigh', text: 'Measure the widest point of the upper thigh, usually just below the crotch. Measure both legs and send the larger number.' },
+  { name: 'Upper arm', text: 'Relax your arm at your side and measure around the widest part of the upper arm, normally near the bicep.' },
+  { name: 'Neck', text: 'Measure around the base of the neck. Add nothing — a latex collar should sit snug without pressing.' },
+  { name: 'Torso length', text: 'Hold the tape at the side of your neck, level with the top of the shoulder, and let it fall vertically down your front to the point between your legs where the catsuit seam would sit. Keep the tape straight, not following the curve of the body.' },
+  { name: 'Height', text: 'Optional, but useful for sleeve and leg length. Measure without shoes, standing against a wall.' },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to measure for latex clothing',
+    description: meta.description,
+    totalTime: 'PT10M',
+    tool: [{ '@type': 'HowToTool', name: 'Soft measuring tape' }],
+    step: steps.map((s, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: s.name,
+      text: s.text,
+    })),
+  },
+];
+
+const faq = [
+  {
+    q: 'Can I measure myself for latex clothing?',
+    a: 'Yes, and most makers expect it. Self-measurement is usually accurate to within 1–2 cm, which the reduction absorbs. The trick is to measure twice, keep the tape level, and never pull it tight enough to compress the skin.',
+  },
+  {
+    q: 'Which measurement do people get wrong most often?',
+    a: 'Torso length, followed by the thigh. Torso length is usually measured along the curve of the body instead of straight down, which shortens it. Thigh is often measured too low, where the leg narrows.',
+  },
+  {
+    q: 'Why have I been asked for a measurement I have never heard of?',
+    a: 'Because latex patterns are drafted from body measurements rather than from a size letter. Torso length, upper arm and thigh are normal in this trade but almost never appear in high street sizing.',
+  },
+  {
+    q: 'Should I measure over clothing?',
+    a: 'No. Measure against bare skin or over the underwear you would wear under the garment, and always with the same tape. Clothes can add a centimetre or more in the wrong places.',
+  },
+];
+
+import QuickAnswer from '../components/QuickAnswer.astro';
+
+---
+<Base title={meta.title} description={meta.description} path={meta.path} jsonLd={jsonLd}>
+  <Breadcrumbs items={[{ name: 'Measuring guide', path: meta.path }]} />
+
+  <h1>How to measure for latex clothing</h1>
+  <p class="lede">
+    Latex makers do not work from size letters, they work from nine body measurements. Get these right
+    once and you can order from any maker without arguing about what a size "L" means.
+  </p>
+
+  <QuickAnswer
+    updated={SITE.updated}
+    points={[
+      'Latex makers need nine measurements, not a size letter.',
+      'The three that go wrong most: <b>torso length</b> (taken along the body curve instead of straight), <b>thigh</b> (taken too low) and <b>upper arm</b> (taken flexed or pressed against the chest).',
+      'Torso length runs straight from the side of the neck, over the bust, to the crotch point &mdash; a catsuit that is short in the torso cannot be corrected later.',
+    ]}
+  />
+
+
+  <h2>Before you start</h2>
+  <ul>
+    <li>Use a soft tailor's tape, not a builder's tape or a piece of string.</li>
+    <li>Wear as little as possible — thin underwear at most.</li>
+    <li>Stand relaxed and breathe normally. Do not pull the tape tight enough to dent the skin.</li>
+    <li>Write everything down in centimetres, and if you are near a boundary, measure again.</li>
+  </ul>
+
+  <h2>The nine measurements</h2>
+  <ol>
+    {steps.map((s) => (
+      <li><strong>{s.name}.</strong> {s.text}</li>
+    ))}
+  </ol>
+
+  <h2>The three measurements people get wrong</h2>
+  <p>
+    <strong>Torso length</strong> is the classic mistake. It has to run straight down from the side of
+    the neck, passing over the bust, to the crotch point — if you follow the curve of your body the
+    measurement comes out short, and a catsuit that is short in the torso cannot be corrected later.
+  </p>
+  <p>
+    <strong>Thigh</strong> is usually taken too low, where the leg has already narrowed. It should be at
+    the widest point, immediately below the crotch.
+  </p>
+  <p>
+    <strong>Upper arm</strong> is often measured flexed or against the chest. Keep the arm hanging
+    relaxed at your side.
+  </p>
+
+  <h2>What to do with the numbers</h2>
+  <p>
+    Put them into the <a href="/size-calculator/">latex size calculator</a>. It applies the reduction for
+    your sheeting thickness and produces a measurement sheet showing both your body measurements and the
+    finished sizes to cut, which is exactly what a maker needs.
+  </p>
+
+  <Faq items={faq} />
+</Base>

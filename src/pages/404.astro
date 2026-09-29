@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Page not found"
+  description="The page you were looking for does not exist."
+  path="/404/"
+  noindex={true}
+>
+  <h1>That page does not exist</h1>
+  <p class="lede">The link may be out of date. These pages are the useful ones:</p>
+  <div class="tools">
+    <a class="tool" href="/size-calculator/"><h3>Size calculator</h3><p>Finished sizes to cut, from your measurements.</p></a>
+    <a class="tool" href="/measure-guide/"><h3>Measuring guide</h3><p>The nine measurements latex makers ask for.</p></a>
+    <a class="tool" href="/thickness-guide/"><h3>Thickness guide</h3><p>0.25 mm to 0.80 mm compared.</p></a>
+  </div>
+</Base>

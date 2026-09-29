@@ -1,0 +1,17 @@
+---
+import { SITE, PAGES } from '../site.config.mjs';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <nav aria-label="Footer">
+      {PAGES.map((p) => <a href={p.path}>{p.path === '/' ? 'Home' : p.title.split(':')[0].split('—')[0].trim()}</a>)}
+    </nav>
+    <p>{SITE.name} — {SITE.tagline}. Contact: <a href={'mailto:' + SITE.email}>{SITE.email}</a></p>
+    <p class="disclaimer">
+      The fitting values shown on this site are workshop guidelines for garment cutting and should be
+      confirmed with your maker before ordering. This site is for garment fitting and care purposes.
+      © {year} {SITE.name}.
+    </p>
+  </div>
+</footer>

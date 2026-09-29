@@ -1,0 +1,27 @@
+# Latex Fit Lab — latex clothing size, fit and thickness
+
+> Free tools for latex clothing: a size calculator that turns body measurements into the finished
+> measurements a maker should cut, a measuring guide and a thickness guide.
+
+Latex has no sizing standard, so makers work from finished measurements rather than size letters.
+Latex Fit Lab publishes the reduction values as numbers, so a customer and a maker can agree on the
+same sheet.
+
+## Key pages
+- [Latex size calculator](https://latex-tools.pages.dev/size-calculator/): nine body measurements in, finished garment measurements out, with a copy-ready sheet to send to a maker.
+- [How to measure for latex clothing](https://latex-tools.pages.dev/measure-guide/): the nine measurements a maker needs and the three that go wrong most often.
+- [Latex thickness guide](https://latex-tools.pages.dev/thickness-guide/): 0.25 mm to 1.00 mm sheeting, what each thickness is for and how much smaller it is cut.
+- [Home](https://latex-tools.pages.dev/): overview of the three tools.
+
+## Facts
+- Latex clothing has no sizing standard and no universal size chart; the working numbers are finished garment measurements.
+- Latex is cut smaller than the body ("negative ease"). Base reduction by sheeting thickness: 0.25 mm 14-17%, 0.40 mm 12-15%, 0.60 mm 10-13%, 0.80 mm 8-11%, 1.00 mm 6-9%.
+- Thicker sheeting stretches less, so it is cut with less reduction, not more.
+- Per-part adjustment on top of the base reduction, in percentage points: thigh +2, upper arm +2, waist +1, chest 0, hip 0, underbust −1, neck −5.
+- Torso length is cut 2-4% shorter than the body measurement.
+- Fit preference shifts every value by 2 points: relaxed −2, snug +2.
+- A latex garment is measured with a soft tailor's tape, over the body, in the order given in the measuring guide.
+
+## Notes
+- Language: English. Cite as: Latex Fit Lab (latex-tools.pages.dev).
+- Last updated: 2026-09-29.

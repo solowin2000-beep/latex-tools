@@ -1,0 +1,153 @@
+---
+import Base from '../layouts/Base.astro';
+import Faq from '../components/Faq.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE, PAGES } from '../site.config.mjs';
+import { EASE_BY_THICKNESS } from '../data/fit-model.mjs';
+
+const meta = PAGES.find((p) => p.path === '/thickness-guide/');
+
+// GEO：文章类结构化数据，带发布/更新日期（Base.astro 会自动补 datePublished / dateModified）。
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: meta.title,
+    description: meta.description,
+    inLanguage: 'en',
+    mainEntityOfPage: new URL(meta.path, SITE.url).href,
+    author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  },
+];
+
+const detail = {
+  '0.25': {
+    feel: 'Thin, almost like a second skin. Lightest to wear and the easiest to move in.',
+    stretch: 'Stretches furthest, so it can be cut smallest and still go on.',
+    durability: 'Handle with care — thin sheet is the most prone to fingernail damage and seam tears.',
+    best: 'First catsuit, warm climates, costumes, anything you expect to take on and off often.',
+    difficulty: 'Easiest',
+  },
+  '0.40': {
+    feel: 'The trade standard. Firm, glossy and still comfortable for a full evening.',
+    stretch: 'Stretches well but noticeably less than 0.25 mm.',
+    durability: 'Good balance of strength and give, which is why most catsuits are made from it.',
+    best: 'Everyday wear, photography, a first serious catsuit, most made-to-measure orders.',
+    difficulty: 'Standard',
+  },
+  '0.60': {
+    feel: 'Heavier, more structured, holds its shape with less cling to the body.',
+    stretch: 'Noticeably stiffer; seams and zips take more of the load when dressing.',
+    durability: 'Very hard-wearing. Popular for corsets, trousers and structured pieces.',
+    best: 'Structured garments, heavy wear, buyers who dislike the second-skin feeling.',
+    difficulty: 'Hard',
+  },
+  '0.80': {
+    feel: 'Rigid and weighty. Reads as armour rather than clothing.',
+    stretch: 'Very little give. A garment this thick is cut close to the body or it will not go on.',
+    durability: 'Extremely durable, but stress concentrates at seams and closures.',
+    best: 'Structured pieces, shoulder and hip definition, statement garments.',
+    difficulty: 'Very hard',
+  },
+  '1.00': {
+    feel: 'The heaviest sheet normally used for garments. Stiff, heavy and closer to armour plating.',
+    stretch: 'Almost no give at all. The pattern sits very close to your body measurements.',
+    durability: 'Extremely strong sheet, but every bit of stress lands on the seams, zips and glue lines.',
+    best: 'Statement pieces, corsetry, chest and shoulder plates, garments that must hold a hard silhouette.',
+    difficulty: 'Very hard',
+  },
+};
+
+const faq = [
+  {
+    q: 'What is the most common latex thickness for a catsuit?',
+    a: '0.40 mm. It is the best compromise between stretch, durability and price, and it is what most made-to-measure catsuits are cut from.',
+  },
+  {
+    q: 'Is 0.25 mm latex too thin?',
+    a: 'Not for a first garment. Thin sheet stretches easily, which makes dressing and moving simpler. The trade-off is that it tears more readily, so nails and jewellery need care.',
+  },
+  {
+    q: 'Why is 1.00 mm latex so hard to wear?',
+    a: 'Because it barely stretches. A 1.00 mm garment has to be cut very close to your body measurements to go on at all, which leaves almost no tolerance for a measurement error — and it puts a lot of load on the seams and closures.',
+  },
+  {
+    q: 'Does thicker latex look different?',
+    a: 'Yes. Thicker sheet holds a shape instead of following every contour, so it looks more structured and slightly less glossy at the body edges. Thin sheet hugs the body and reflects light more evenly.',
+  },
+  {
+    q: 'Can I mix thicknesses in one garment?',
+    a: 'Makers do this regularly — for example 0.80 mm panels on the torso with 0.40 mm sleeves, so the garment holds its shape while the arms stay easy to bend.',
+  },
+  {
+    q: 'Does thickness change the price?',
+    a: 'Usually, yes. Heavier sheeting costs more per square metre, and 0.60 mm and up is harder to sew, so the labour charge rises too.',
+  },
+];
+
+import QuickAnswer from '../components/QuickAnswer.astro';
+
+---
+<Base title={meta.title} description={meta.description} path={meta.path} jsonLd={jsonLd}>
+  <Breadcrumbs items={[{ name: 'Thickness guide', path: meta.path }]} />
+
+  <h1>Latex thickness guide: 0.25 mm to 1.00 mm</h1>
+  <p class="lede">
+    Thickness is the single choice that changes everything else: how the garment feels, how long it
+    lasts, how small the pattern can be cut, and how hard it is to get into.
+  </p>
+
+  <QuickAnswer
+    updated={SITE.updated}
+    points={[
+      'Thickness decides how the garment feels, how long it lasts, how small the pattern can be cut and how hard it is to get into.',
+      'Pattern reduction by thickness: 0.25&nbsp;mm 14&ndash;17%, 0.40&nbsp;mm 12&ndash;15%, 0.60&nbsp;mm 10&ndash;13%, 0.80&nbsp;mm 8&ndash;11%, 1.00&nbsp;mm 6&ndash;9%.',
+      'Thicker sheeting stretches less, so it takes less reduction &mdash; and it is harder to put on.',
+    ]}
+  />
+
+
+  <table>
+    <thead>
+      <tr><th>Thickness</th><th>Pattern reduction</th><th>Dressing difficulty</th><th>Best for</th></tr>
+    </thead>
+    <tbody>
+      {Object.keys(detail).map((mm) => (
+        <tr>
+          <td>{mm} mm</td>
+          <td class="num">-{EASE_BY_THICKNESS[mm][0]}% to -{EASE_BY_THICKNESS[mm][1]}%</td>
+          <td class="small">{detail[mm].difficulty}</td>
+          <td class="small">{detail[mm].best}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  {Object.keys(detail).map((mm) => (
+    <>
+      <h2>{mm} mm latex</h2>
+      <ul>
+        <li><strong>Feel:</strong> {detail[mm].feel}</li>
+        <li><strong>Stretch:</strong> {detail[mm].stretch}</li>
+        <li><strong>Durability:</strong> {detail[mm].durability}</li>
+        <li><strong>Best for:</strong> {detail[mm].best}</li>
+      </ul>
+    </>
+  ))}
+
+  <h2>How to choose</h2>
+  <p>
+    If this is your first latex garment, choose 0.40 mm unless you know you dislike the second-skin
+    feeling — then go to 0.60 mm. Choose 0.25 mm when easy dressing and free movement matter more than
+    long-term toughness. Choose 0.80 mm or 1.00 mm only for structured pieces where the garment is meant
+    to hold a silhouette instead of following the body.
+  </p>
+  <p>
+    Once you have chosen, enter your measurements in the <a href="/size-calculator/">size calculator</a>
+    with that thickness selected. The reduction changes with the sheet, so the same body produces
+    different finished sizes at 0.25 mm and at 1.00 mm.
+  </p>
+
+  <Faq items={faq} />
+</Base>

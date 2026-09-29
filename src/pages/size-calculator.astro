@@ -1,0 +1,124 @@
+---
+import Base from '../layouts/Base.astro';
+import Calculator from '../components/Calculator.astro';
+import Faq from '../components/Faq.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE, PAGES } from '../site.config.mjs';
+import { EASE_BY_THICKNESS } from '../data/fit-model.mjs';
+
+const meta = PAGES.find((p) => p.path === '/size-calculator/');
+
+const rows = Object.keys(EASE_BY_THICKNESS).map((k) => ({
+  mm: k,
+  lo: EASE_BY_THICKNESS[k][0],
+  hi: EASE_BY_THICKNESS[k][1],
+}));
+
+const faq = [
+  {
+    q: 'What is negative ease in latex clothing?',
+    a: 'Negative ease is the amount by which a pattern is cut smaller than the body it is meant for. Latex clothing needs negative ease because the material has no structure of its own: it only looks skin-tight while it is being stretched. At 0.40 mm the usual figure is 12–15%.',
+  },
+  {
+    q: 'What measurements does a latex maker need?',
+    a: 'Nine: chest, underbust, waist, hip, thigh, upper arm, neck, torso length (side of neck to crotch) and optionally your height for sleeve and leg length. If you only measure one thing properly, make it the torso length — a suit that is too short at the torso cannot be fixed.',
+  },
+  {
+    q: 'How do I measure torso length for a latex catsuit?',
+    a: 'Stand straight with a soft tape at the side of your neck, level with the top of the shoulder. Let the tape fall straight down your front, past the bust, to the point between your legs where a catsuit seam would sit. Do not follow the curve of your body — the tape must stay vertical.',
+  },
+  {
+    q: 'Why is the suggested finished size smaller than my measurements?',
+    a: 'Because the garment has to stretch. If it were cut to your exact measurements it would wrinkle and slide. The calculator applies the reduction for your thickness and fit preference, then shows you both numbers so your maker can check the logic.',
+  },
+  {
+    q: 'Should I size up if I am between two sizes?',
+    a: 'No — size down. Latex is engineered to stretch, so the smaller size simply pulls into place, while the larger one stays loose, creases and slips at the shoulders and knees.',
+  },
+  {
+    q: 'Is this calculator accurate?',
+    a: 'It uses workshop reduction figures rather than an industry standard, because latex has no sizing standard. Treat the output as a well-founded starting point, and confirm the final numbers with whoever is making your garment.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Latex Fit & Measurement Assistant',
+    url: new URL(meta.path, SITE.url).href,
+    applicationCategory: 'UtilityApplication',
+    operatingSystem: 'Any',
+    browserRequirements: 'Requires JavaScript',
+    isAccessibleForFree: true,
+    description: meta.description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  },
+];
+
+import QuickAnswer from '../components/QuickAnswer.astro';
+
+---
+<Base title={meta.title} description={meta.description} path={meta.path} jsonLd={jsonLd}>
+  <Breadcrumbs items={[{ name: 'Size calculator', path: meta.path }]} />
+
+  <h1>Latex size calculator: what should your garment be cut to?</h1>
+  <p class="lede">
+    There is no universal latex size chart, because latex has no sizing standard. What a maker actually
+    needs is the finished measurement for each part. Enter your numbers below and this tool applies the
+    reduction for your sheeting thickness, then writes the measurement sheet for you.
+  </p>
+
+  <QuickAnswer
+    updated={SITE.updated}
+    points={[
+      'The calculator turns nine body measurements into the finished measurements a maker should cut to.',
+      'Base reduction by thickness: 0.25&nbsp;mm 14&ndash;17%, 0.40&nbsp;mm 12&ndash;15%, 0.60&nbsp;mm 10&ndash;13%, 0.80&nbsp;mm 8&ndash;11%, 1.00&nbsp;mm 6&ndash;9%.',
+      'On top of the base: thigh and upper arm are cut <b>2 points tighter</b> and the waist 1, while the neck is 5 points looser and the underbust 1 point looser. Torso length is cut 2&ndash;4% shorter.',
+      'A snug preference adds 2 points to every value, a relaxed one removes 2.',
+    ]}
+  />
+
+
+  <Calculator />
+
+  <h2>How the calculation works</h2>
+  <p>
+    Every part is reduced by a percentage that depends on the thickness of the latex: the stiffer the
+    sheet, the less the pattern can be cut down, or the garment becomes impossible to pull on.
+  </p>
+  <table>
+    <thead>
+      <tr><th>Thickness</th><th>Reduction applied</th><th>What it means</th></tr>
+    </thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>
+          <td>{r.mm} mm</td>
+          <td class="num">-{r.lo}% to -{r.hi}%</td>
+          <td class="small">{r.mm === '0.40' ? 'Standard catsuit weight' : r.mm === '0.25' ? 'Stretches furthest, handles best' : r.mm === '0.60' ? 'Heavier feel, less give' : 'Close to body size, very little stretch'}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="small">
+    Thighs and upper arms take a slightly larger reduction than the torso, the neck takes less, and
+    torso length is treated separately — length reduction is far smaller than girth reduction.
+  </p>
+
+  <h2>Reading your result</h2>
+  <p>
+    Each row gives a range, not a single number, because a garment that is tighter to get into also
+    looks better once it is on. Beginners should work at the looser end of the range; experienced
+    wearers can go tighter. Either way, send the sheet as it is — your maker can move within the range
+    and will normally confirm before cutting.
+  </p>
+  <p>
+    If any part needs more than about 17% reduction, the tool flags it. At that point the garment stops
+    being practical to put on without help and the seams come under real stress, so it is worth
+    choosing a thinner sheet or adding a zipper instead.
+  </p>
+
+  <Faq items={faq} />
+</Base>

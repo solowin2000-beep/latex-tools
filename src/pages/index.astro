@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import Faq from '../components/Faq.astro';
+import { SITE, PAGES } from '../site.config.mjs';
+
+const meta = PAGES.find((p) => p.path === '/');
+
+const faq = [
+  {
+    q: 'How do I know what size latex garment to order?',
+    a: 'Latex garments are cut smaller than the body on purpose, because the material only becomes form-fitting when it is stretched. So the useful question is not "which letter size am I" but "what finished measurements should the maker cut". Measure nine body points, apply the reduction for your sheeting thickness, and you have the numbers a maker needs.',
+  },
+  {
+    q: 'Should I choose my normal clothing size?',
+    a: 'No. High street sizing has nothing to do with latex. Two makers can both sell an "L" and cut it completely differently, and many garments are made to measure from your own numbers rather than from a size letter.',
+  },
+  {
+    q: 'Why does my new latex garment measure smaller than my body?',
+    a: 'That is the design. A garment cut to your exact measurements would hang loose, wrinkle at the joints and slide down. Makers reduce the pattern by roughly 12-15% at 0.40 mm so the rubber has to stretch to fit, which is what produces the skin-tight look.',
+  },
+  {
+    q: 'Does the thickness of the latex change my size?',
+    a: 'Yes. Thicker sheeting stretches less, so it cannot be cut as small or it becomes impossible to pull on. A 0.80 mm suit is cut closer to your body measurements than a 0.25 mm suit.',
+  },
+  {
+    q: 'Are the numbers on this site universal?',
+    a: 'They are workshop guidelines, not a standard. Latex has no industry sizing standard at all. Use our figures as a starting point and always confirm with your maker before ordering.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+    description: meta.description,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE.name,
+    url: SITE.url,
+    email: SITE.email,
+  },
+];
+
+import QuickAnswer from '../components/QuickAnswer.astro';
+
+---
+<Base title={meta.title} description={meta.description} path={meta.path} jsonLd={jsonLd}>
+  <section class="hero">
+    <h1>Latex clothing size calculator and fit tools</h1>
+    <p class="lede">
+      Latex has no sizing standard and no universal calculator — even the search results say so. These free
+      tools replace guesswork with numbers: work out what a maker should actually cut, understand how
+      thickness changes the fit, and measure yourself once, correctly.
+    </p>
+
+  <QuickAnswer
+    updated={SITE.updated}
+    points={[
+      'Latex clothing has no sizing standard, so makers cut from finished measurements rather than size letters.',
+      'A latex garment is cut smaller than the body: base reduction <b>14&ndash;17%</b> at 0.25&nbsp;mm sheeting, <b>12&ndash;15%</b> at 0.40&nbsp;mm, <b>10&ndash;13%</b> at 0.60&nbsp;mm, <b>8&ndash;11%</b> at 0.80&nbsp;mm and <b>6&ndash;9%</b> at 1.00&nbsp;mm.',
+      'Thicker sheeting stretches less, so it is cut with <i>less</i> reduction, not more.',
+    ]}
+  />
+
+    <p style="margin-bottom:40px"><a class="btn-link" href="/size-calculator/">Open the size calculator</a></p>
+  </section>
+
+  <div class="tools">
+    <a class="tool" href="/size-calculator/">
+      <h3>Size calculator</h3>
+      <p>Enter your measurements, get the finished sizes to cut and a measurement sheet to send to your maker.</p>
+    </a>
+    <a class="tool" href="/measure-guide/">
+      <h3>Measuring guide</h3>
+      <p>The nine measurements latex makers ask for, and the three parts almost everyone gets wrong.</p>
+    </a>
+    <a class="tool" href="/thickness-guide/">
+      <h3>Thickness guide</h3>
+      <p>0.25 mm to 0.80 mm: how stretch, durability and pattern reduction change with the sheet you choose.</p>
+    </a>
+  </div>
+
+  <h2>Why a latex garment is cut smaller than you are</h2>
+  <p>
+    Natural latex has no woven threads to hold a shape, so a garment only hugs the body while it is
+    stretched. Makers therefore cut the pattern below your measurements — typically 12–15% at 0.40 mm,
+    less as the sheet gets thicker and stiffer.
+  </p>
+  <p>
+    That single fact explains most of the confusion around latex sizing: the garment arrives measuring
+    smaller than your body (correct), two makers disagree about what "L" means (expected), and the only
+    reliable way to order is to send finished measurements rather than a size letter.
+  </p>
+
+  <h2>How to use these tools</h2>
+  <ol>
+    <li>Measure yourself using the <a href="/measure-guide/">measuring guide</a>, or have someone help you.</li>
+    <li>Enter the numbers in the <a href="/size-calculator/">size calculator</a> and pick your sheeting thickness.</li>
+    <li>Copy the measurement sheet and send it to your maker — it shows both your body measurements and the finished sizes to cut.</li>
+  </ol>
+
+  <Faq items={faq} />
+</Base>

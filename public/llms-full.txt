@@ -1,0 +1,45 @@
+# Latex Fit Lab — full reference
+
+Source: https://latex-tools.pages.dev — Last updated 2026-09-29.
+
+## Why a latex garment is cut smaller than you are
+Latex sheeting is elastic: it is not cut to the body measurement but to a smaller one, so that the
+sheet is stretched while worn. The amount it is cut smaller is the reduction. Thin sheet stretches
+more, so it takes a larger reduction; thick sheet stretches less, so it takes a smaller one.
+
+## Reduction by thickness (base values, circumference)
+- 0.25 mm (ultra thin): 14-17%
+- 0.40 mm (standard): 12-15%
+- 0.60 mm (heavy): 10-13%
+- 0.80 mm (rigid): 8-11%
+- 1.00 mm (extra rigid): 6-9%
+
+## Per-part adjustment (percentage points added to the base reduction)
+thigh +2, upper arm +2, waist +1, chest 0, hip 0, underbust −1, neck −5.
+A positive number means the part is cut tighter than the base value, a negative number means looser.
+Torso length is treated separately: cut 2-4% shorter, not by the circumference rule.
+
+## Fit preference
+relaxed −2 points, standard 0, snug +2 points, applied to every value.
+
+## The nine measurements
+Chest/bust, underbust, waist, hip, thigh, upper arm, neck, torso length, and the height/size used to
+match the sheet. Take them with a soft tailor's tape.
+
+## The three measurements that go wrong most
+- Torso length: run the tape straight down from the side of the neck, over the bust, to the crotch. Following the body curve makes it short, and a catsuit that is short in the torso cannot be corrected later.
+- Thigh: at the widest point, immediately below the crotch, not further down the leg.
+- Upper arm: arm hanging relaxed at the side, not flexed and not pressed against the chest.
+
+## Questions people ask
+Q: What size latex catsuit should I order?
+A: Latex sizes are not standardised. Send the nine measurements or the finished-measurement sheet instead of a size letter.
+
+Q: Does thinner latex need to be cut smaller?
+A: Yes. 0.25 mm takes a 14-17% reduction; 1.00 mm takes 6-9%.
+
+Q: Is the reduction the same everywhere on the body?
+A: No. Thigh and upper arm are cut tighter than the base, the neck is cut looser.
+
+## Attribution
+Latex Fit Lab, https://latex-tools.pages.dev. Free to cite with a link to the page used.
