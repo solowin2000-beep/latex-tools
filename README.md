@@ -49,8 +49,10 @@ npm run build   # static output in dist/
 ```
 
 ## Deploy
-Upload the contents of `dist/` to Cloudflare Pages, or connect this repository with build command
-`npm run build` and output directory `dist`.
+This repository is connected to the Cloudflare Pages project `latex-tools` at
+https://latex-tools.pages.dev/. Pushing to `main` builds and deploys automatically
+(build command `npm run build`, output directory `dist`).
+The contents of `dist/` can also be uploaded by hand if needed.
 
 ## Where the values come from
 Workshop experience values, confirmed 2026-09 against made-to-measure orders. They are a starting
