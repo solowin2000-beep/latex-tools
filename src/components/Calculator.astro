@@ -1,6 +1,6 @@
 ---
-import { SITE } from '../site.config.mjs';
 import Icon from './Icon.astro';
+import OrderCta from './OrderCta.astro';
 import { ICONS } from '../data/icons.mjs';
 import {
   PARTS,
@@ -128,10 +128,7 @@ const MODEL = {
     <p>Copy this sheet and send it to your maker. It lists both your body measurements and the finished sizes they should cut, so nothing gets misread.</p>
     <textarea id="sheet" readonly aria-label="Measurement sheet"></textarea>
     <button id="copy" type="button" class="secondary" style="margin-top:14px">Copy measurement sheet</button>
-    <p class="small" style="margin-top:14px">
-      Ordering from us? Email the sheet to <a href={'mailto:' + SITE.email}>{SITE.email}</a> and we
-      will quote a made-to-measure garment from your numbers.
-    </p>
+    <OrderCta />
   </div>
 </div>
 

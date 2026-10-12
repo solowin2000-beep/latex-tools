@@ -55,6 +55,7 @@ const faq = [
 ];
 
 import QuickAnswer from '../components/QuickAnswer.astro';
+import OrderCta from '../components/OrderCta.astro';
 
 ---
 <Base title={meta.title} description={meta.description} path={meta.path} jsonLd={jsonLd}>
@@ -114,4 +115,8 @@ import QuickAnswer from '../components/QuickAnswer.astro';
   </p>
 
   <Faq items={faq} />
+
+  <div class="cta">
+    <OrderCta />
+  </div>
 </Base>

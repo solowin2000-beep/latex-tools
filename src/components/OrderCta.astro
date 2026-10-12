@@ -1,0 +1,12 @@
+---
+/*
+ * 转化入口：把"算好的数字"接到真正下单的地方（latexpapa.com）。
+ * size-calculator / measure-guide / thickness-guide 三个页面共用这一处文案。
+ */
+const {
+  href = 'https://www.latexpapa.com/',
+  text = 'Want us to cut it from these numbers?',
+  label = 'latexpapa.com',
+} = Astro.props;
+---
+<p class="small order-cta">{text} → <a href={href} rel="noopener">{label}</a></p>

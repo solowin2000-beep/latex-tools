@@ -199,3 +199,8 @@ td.num { white-space: normal; }
 .quick-answer li { margin: 0 0 6px; }
 .quick-answer li:last-child { margin-bottom: 0; }
 .quick-answer__meta { margin-top: 10px; font-size: 13px; color: var(--text-3); }
+
+/* 转化入口（OrderCta 组件）：一行小字 + 指向 latexpapa.com 的链接 */
+.order-cta { margin: 16px 0 0; }
+.order-cta a { font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+.order-cta a:hover { color: var(--text-1); }
